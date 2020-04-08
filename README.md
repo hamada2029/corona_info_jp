@@ -9,7 +9,7 @@ newsdigestより1時間毎に取得
   
   
 
-### curlで最新状態をダウンロード
+### curlで最新状態をダウンロードする方法
 ```
 curl -H 'Cookie: ref=nd_app' 'https://newsdigest.jp/pages/coronavirus/' > cur.html
 ```  
