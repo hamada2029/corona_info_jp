@@ -5,4 +5,14 @@ newsdigestより1時間毎に取得
 スマートフォンが無くてもブラウザから施設名、住所などが確認できます。  
   
   
-[https://script.google.com/macros/s/AKfycbydQstaIcF5rcuAUBZRemtPOSyEyREqTCjqCijWWntcx5IL4Cw/exec](https://script.google.com/macros/s/AKfycbydQstaIcF5rcuAUBZRemtPOSyEyREqTCjqCijWWntcx5IL4Cw/exec)
+[https://script.google.com/macros/s/AKfycbydQstaIcF5rcuAUBZRemtPOSyEyREqTCjqCijWWntcx5IL4Cw/exec](https://script.google.com/macros/s/AKfycbydQstaIcF5rcuAUBZRemtPOSyEyREqTCjqCijWWntcx5IL4Cw/exec)  
+  
+  
+
+### curlで最新状態をダウンロード
+```
+curl -H 'Cookie: ref=nd_app' 'https://newsdigest.jp/pages/coronavirus/' > cur.html
+```  
+実行後にブラウザでcur.htmlファイルを開くと見られます。  
+
+
