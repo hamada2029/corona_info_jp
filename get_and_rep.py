@@ -10,15 +10,20 @@ P2 = re.compile('<script src="(https://app-static.newsdigest.jp/corona/_next/sta
 DLCODE = """
 let exflag = false;
 
-function _dl(j){
+function _dl(n){
     if(exflag){return;}
+    let csv_s = '"prefecture","name","reports","disinfected","address","firstRelease","lastEdited"\n';
+    for(let i=0; i<n.length; i++){
+        let e = n[i];
+        csv_s += '"' + e.prefecture + '","' + e.name + '","' + e.reports + '","' + e.disinfected + '","' + e.address + '","' + e.firstRelease + '","' + e.lastEdited + '"\n'
+    }
+
     let a = document.createElement("a");
-    let js = JSON.stringify(j, null, 4);
     a.href = URL.createObjectURL(
-        new Blob([js], {type: "application/json"})
+        new Blob([csv_s], {type: "text/csv"})
     );
     let t = new Date().getTime();
-    a.setAttribute("download", 'data' + t + '.json');
+    a.setAttribute("download", 'data' + t + '.csv');
     a.click();
     exflag = true;
 }

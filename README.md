@@ -1,18 +1,11 @@
 # corona_info_jp
   
-新型コロナウイルス 日本国内の感染状況 PC用ミラーサイト
-newsdigestより1時間毎に取得  
+新型コロナウイルス 日本国内の感染状況 PC用ユーザースクリプト  
 スマートフォンが無くてもブラウザから施設名、住所などが確認できます。  
-  
-  
-[https://script.google.com/macros/s/AKfycbydQstaIcF5rcuAUBZRemtPOSyEyREqTCjqCijWWntcx5IL4Cw/exec](https://script.google.com/macros/s/AKfycbydQstaIcF5rcuAUBZRemtPOSyEyREqTCjqCijWWntcx5IL4Cw/exec)  
-  
-  
 
-### curlで最新状態をダウンロードする方法
-```
-curl -H 'Cookie: ref=nd_app' 'https://newsdigest.jp/pages/coronavirus/' > cur.html
-```  
-実行後にブラウザでcur.htmlファイルを開くと見れます。  
-
-
+1. 下記リンクからTampermonkeyをインストール。
+    - [for Chrome](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
+    - [for Firefox](https://addons.mozilla.org/ja/firefox/addon/tampermonkey/)
+    - [for Safari](https://www.tampermonkey.net/?browser=safari)
+1. [スクリプトリンク](https://raw.githubusercontent.com/hamada2029/corona_info_jp/master/newsdigest_in_disguise.js) <= をクリックしてスクリプトをインストール。
+1. [https://newsdigest.jp/pages/coronavirus/](https://newsdigest.jp/pages/coronavirus/) にアクセスする。
