@@ -13,6 +13,6 @@ newsdigestより1時間毎に取得
 ```
 curl -H 'Cookie: ref=nd_app' 'https://newsdigest.jp/pages/coronavirus/' > cur.html
 ```  
-実行後にブラウザでcur.htmlファイルを開くと見られます。  
+実行後にブラウザでcur.htmlファイルを開くと見れます。  
 
 
