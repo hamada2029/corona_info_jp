@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/js/jquery.tablesorter.combined.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/css/theme.default.min.css">
+    </head>
+</head>
+<body>
+
+<table class="" id="table1">
+    <thead>
+        <tr>
+            <th title="選択で絞り込み" class="first-name filter-select" data-placeholder="All" style="white-space: nowrap;" data-value="<?= _pref ?>">都道府県</th>
+            <th title="入力で絞り込み">施設名</th>
+            <th title="入力で絞り込み" style="white-space: nowrap;">消毒情報</th>
+            <th title="入力で絞り込み" style="white-space: nowrap;">人数</th>
+            <th title="入力で絞り込み">住所</th>
+            <th title="入力で絞り込み">発生日</th>
+            <th title="入力で絞り込み">更新日</th>
+        </tr>
+    </thead>
+    <tbody id="tbody1">
+    </tbody>
+</table>
+
+<script type="text/javascript">
+
+    $('#table1').tablesorter(
+        {
+             widgets: ['zebra', 'filter'],
+             sortList: [[5, 1]]
+        }
+    );
+
+    var a = localStorage.getItem('a');
+    a = JSON.parse(a);
+    var tbody1 = document.getElementById('tbody1');
+    var attrs = ['prefecture', 'name', 'disinfected', 'reports', 'address', 'firstRelease', 'lastEdited'];
+
+    for(var i = 0; i < a.facilities.length; i++){
+        var tr = document.createElement('tr');
+        var fc = a.facilities[i];
+        
+
+        for(var ii = 0; ii < attrs.length; ii++){
+            var td = document.createElement('td');
+            td.innerHTML = fc[attrs[ii]];
+            tr.appendChild(td);
+        }
+
+        tbody1.appendChild(tr);
+    }
+
+    var tid = setTimeout(
+        function(){
+            console.log(document.readyState);
+            if(document.readyState != 'complete'){
+                return;
+            }
+            $('#table1').trigger('update');
+            clearTimeout(tid);
+        },
+        100
+    );
+
+
+
+</script>
+
+
+</body>
+</html>
