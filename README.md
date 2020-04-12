@@ -9,11 +9,3 @@
     - [for Safari](https://www.tampermonkey.net/?browser=safari)
 1. [スクリプトリンク](https://github.com/hamada2029/corona_info_jp/raw/master/newsdigest_in_disguise.user.js) <= をクリックしてスクリプトをインストール。
 1. [https://newsdigest.jp/pages/coronavirus/](https://newsdigest.jp/pages/coronavirus/) にアクセスする。
-
-
-#### 別の方法
-
-```
-pip install requests
-python corona_info.py
-```
