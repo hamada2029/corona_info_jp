@@ -28,7 +28,6 @@
 </table>
 
 <script type="text/javascript">
-
     $('#table1').tablesorter(
         {
              widgets: ['zebra', 'filter'],
@@ -36,37 +35,48 @@
         }
     );
 
-    var a = localStorage.getItem('a');
-    a = JSON.parse(a);
-    var tbody1 = document.getElementById('tbody1');
-    var attrs = ['prefecture', 'name', 'disinfected', 'reports', 'address', 'firstRelease', 'lastEdited'];
+    function setData(_data){
+        var facis = _data.j;
+        var tbody1 = document.getElementById('tbody1');
+        var attrs = ['prefecture', 'name', 'disinfected', 'reports', 'address', 'firstRelease', 'lastEdited'];
 
-    for(var i = 0; i < a.facilities.length; i++){
-        var tr = document.createElement('tr');
-        var fc = a.facilities[i];
-        
+        for(var i = 0; i < facis.length; i++){
+            var tr = document.createElement('tr');
+            var fc = facis[i];
 
-        for(var ii = 0; ii < attrs.length; ii++){
-            var td = document.createElement('td');
-            td.innerHTML = fc[attrs[ii]];
-            tr.appendChild(td);
+            for(var ii = 0; ii < attrs.length; ii++){
+                var td = document.createElement('td');
+                td.innerHTML = fc[attrs[ii]];
+                tr.appendChild(td);
+            }
+
+            tbody1.appendChild(tr);
         }
 
-        tbody1.appendChild(tr);
+        var tid = setTimeout(
+            function(){
+                console.log(document.readyState);
+                if(document.readyState != 'complete'){
+                    return;
+                }
+                $('#table1').trigger('update');
+                clearTimeout(tid);
+            },
+            100
+        );
+
     }
 
-    var tid = setTimeout(
-        function(){
-            console.log(document.readyState);
-            if(document.readyState != 'complete'){
-                return;
-            }
-            $('#table1').trigger('update');
-            clearTimeout(tid);
-        },
-        100
-    );
 
+    function receiveMessage(event){
+        sender_url = 'https://newsdigest.jp/pages/coronavirus/';
+        if(event.origin.indexOf(sender_url) == -1){return;}
+        console.log(event);
+        console.log(event.data);
+        event.source.postMessage('thanks!', event.origin);
+        setData(event.data);
+    }
+    window.addEventListener('message', receiveMessage, false);
 
 
 </script>
