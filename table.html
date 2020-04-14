@@ -7,6 +7,52 @@
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/js/jquery.tablesorter.combined.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/css/theme.default.min.css">
+        <script type="text/javascript">
+            function setData(facis){
+                var tbody1 = document.getElementById('tbody1');
+                var attrs = ['prefecture', 'name', 'disinfected', 'reports', 'address', 'firstRelease', 'lastEdited'];
+
+                for(var i = 0; i < facis.length; i++){
+                    var tr = document.createElement('tr');
+                    var fc = facis[i];
+
+                    for(var ii = 0; ii < attrs.length; ii++){
+                        var td = document.createElement('td');
+                        td.innerHTML = fc[attrs[ii]];
+                        tr.appendChild(td);
+                    }
+
+                    tbody1.appendChild(tr);
+                }
+
+                var tid = setTimeout(
+                    function(){
+                        console.log(document.readyState);
+                        if(document.readyState != 'complete'){
+                            return;
+                        }
+                        $('#table1').trigger('update');
+                        clearTimeout(tid);
+                    },
+                    100
+                );
+
+            }
+
+
+            function receiveMessage(event){
+                if(event.origin != 'https://newsdigest.jp'){
+                    alert('bad origin');
+                    return;
+                }
+                console.log(event);
+                console.log(event.data);
+                setData(event.data);
+            }
+            window.addEventListener(
+                'message', receiveMessage, false
+            );
+        </script>
     </head>
 </head>
 <body>
@@ -34,51 +80,6 @@
              sortList: [[5, 1]]
         }
     );
-
-    function setData(_data){
-        var facis = _data.j;
-        var tbody1 = document.getElementById('tbody1');
-        var attrs = ['prefecture', 'name', 'disinfected', 'reports', 'address', 'firstRelease', 'lastEdited'];
-
-        for(var i = 0; i < facis.length; i++){
-            var tr = document.createElement('tr');
-            var fc = facis[i];
-
-            for(var ii = 0; ii < attrs.length; ii++){
-                var td = document.createElement('td');
-                td.innerHTML = fc[attrs[ii]];
-                tr.appendChild(td);
-            }
-
-            tbody1.appendChild(tr);
-        }
-
-        var tid = setTimeout(
-            function(){
-                console.log(document.readyState);
-                if(document.readyState != 'complete'){
-                    return;
-                }
-                $('#table1').trigger('update');
-                clearTimeout(tid);
-            },
-            100
-        );
-
-    }
-
-
-    function receiveMessage(event){
-        sender_org = 'https://newsdigest.jp';
-        if(event.origin != sender_org){return;}
-        console.log(event);
-        console.log(event.data);
-        setData(event.data);
-        // event.source.postMessage('thanks!', event.origin);
-    }
-    window.addEventListener('message', receiveMessage, false);
-
-
 </script>
 
 

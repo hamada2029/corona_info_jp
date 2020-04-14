@@ -4,6 +4,10 @@
     <title></title>
     <script type="text/javascript">
         function receiveMessage(event){
+            if(event.origin != 'https://newsdigest.jp'){
+                alert('bad origin');
+                return;
+            }
             console.log(event);
             console.log(event.data);
             alert(event.data);
