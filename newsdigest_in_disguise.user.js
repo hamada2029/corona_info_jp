@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         newsdigest in disguise
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  try to take over the world!
 // @author       You
 // @match        https://newsdigest.jp/pages/coronavirus/
@@ -10,7 +10,6 @@
 
 (function() {
     'use strict';
-    // Your code here...
     if(document.cookie.indexOf('ref=nd_app') == -1){
         document.cookie = 'ref=nd_app';
         location.reload();
@@ -30,14 +29,23 @@
 
         console.log(facis);
         //console.log(JSON.stringify(facis, null, 4));
-        var js = JSON.stringify(facis);
-        var form1 = document.createElement('form');
-        form1.method = 'POST';
-        form1.target = '_blank';
-        form1.action = 'https://script.google.com/macros/s/AKfycbxu8CJ-bNEnnxjLye0AJebjof0IGM2OxasIYBB4cMyZahAUNABp/exec';
-        form1.innerHTML = `<textarea name="j">${js}</textarea>`;
-        document.body.appendChild(form1);
-        form1.submit();
+        //var js = JSON.stringify(facis);
+        //         var form1 = document.createElement('form');
+        //         form1.method = 'POST';
+        //         form1.target = '_blank';
+        //         form1.action = 'https://script.google.com/macros/s/AKfycbxu8CJ-bNEnnxjLye0AJebjof0IGM2OxasIYBB4cMyZahAUNABp/exec';
+        //         form1.innerHTML = `<textarea name="j">${js}</textarea>`;
+        //         document.body.appendChild(form1);
+        //         form1.submit();
+        var w = open('https://hamada2029.github.io/corona_info_jp/table.html?' + new Date().getTime());
+
+        setTimeout(
+            function(){
+                w.postMessage(facis, 'https://hamada2029.github.io');
+                console.log('postmsg');
+            },
+            1000
+        );
 
     }
     window._x = _x;
@@ -67,3 +75,4 @@ CLICK
     document.body.appendChild(div);
 
 })();
+
