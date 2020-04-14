@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript">
+        function receiveMessage(event){
+            console.log(event);
+            console.log(event.data);
+            alert(event.data);
+        }
+        window.addEventListener('message', receiveMessage, false);
+    </script>
+</head>
+<body>
+
+</body>
+</html>
