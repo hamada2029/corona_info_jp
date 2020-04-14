@@ -73,8 +73,8 @@
         if(event.origin.indexOf(sender_url) == -1){return;}
         console.log(event);
         console.log(event.data);
-        event.source.postMessage('thanks!', event.origin);
         setData(event.data);
+        // event.source.postMessage('thanks!', event.origin);
     }
     window.addEventListener('message', receiveMessage, false);
 
