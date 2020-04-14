@@ -69,8 +69,8 @@
 
 
     function receiveMessage(event){
-        sender_url = 'https://newsdigest.jp/pages/coronavirus/';
-        if(event.origin.indexOf(sender_url) == -1){return;}
+        sender_org = 'https://newsdigest.jp';
+        if(event.origin != sender_org){return;}
         console.log(event);
         console.log(event.data);
         setData(event.data);
