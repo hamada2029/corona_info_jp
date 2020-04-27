@@ -34,7 +34,7 @@
                 w.postMessage(facis, 'https://hamada2029.github.io');
                 console.log('postmsg');
             },
-            1000
+            2000
         );
 
     }
