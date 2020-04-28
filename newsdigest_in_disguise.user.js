@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         newsdigest in disguise
 // @namespace    http://tampermonkey.net/
-// @version      0.4
+// @version      0.5
 // @description  try to take over the world!
 // @author       You
 // @match        https://newsdigest.jp/pages/coronavirus/
@@ -16,13 +16,15 @@
     }
 
 
+    // var t=e.facility の2行前あたりにブレークポイント
+    // if(!window.__x){window.__x=[]}; window.__x.push(e);
+
     function __postFacis(){
-        var cs = document.querySelectorAll('circle[id]');
         var facis = [];
 
-        cs.forEach(
+        window.__x.forEach(
             function(e){
-                facis.push(e.__data__);
+                facis.push(e.facility);
             }
         );
 
